@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const ObjectID = require('mongodb').ObjectID;
 const Review = require('../database/schema.js');
 const port = 5000;
 

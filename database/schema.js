@@ -23,6 +23,9 @@ const schema = new mongoose.Schema({
     },
     checkIn: {
       type: Number
+    },
+    value: {
+      type: Number
     }
   },
   response: {

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
-    "setupdb": "node database/seedScript.js"
+    "setupdb": "node database/seedData.js"
   },
   "dependencies": {
     "express": "^4.17.1",

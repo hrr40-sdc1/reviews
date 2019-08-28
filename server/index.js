@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const Review = require('../database/schema.js');
 const port = 5000;
-
+// const exports = module.exports = {};
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
@@ -68,3 +68,4 @@ app.get('/ratings/:houseId', function(req, res) {
   })
 });
 
+module.exports = app;

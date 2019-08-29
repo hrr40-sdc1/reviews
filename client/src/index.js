@@ -15,6 +15,7 @@ class App extends React.Component {
       ratings: {},
       reviews: [],
       page: 0,
+      length: 0
     }
     this.searchTerm = '';
     this.length = 0;
@@ -58,7 +59,9 @@ class App extends React.Component {
       url: secondUrl,
       contentTupe: "application/json",
       success: (data) => {
-        this.length = data.length;
+        this.setState({
+          length: data.length
+        })
       },
       error: () => {
         console.log('get error')
@@ -115,7 +118,7 @@ class App extends React.Component {
           <ReviewsList reviews={this.state.reviews}/>
         </div>
         <div className="nav">
-          <Nav numOfPages={Math.ceil(this.length / this.limit)}
+          <Nav numOfPages={Math.ceil(this.state.length / this.limit)}
               nextPage={this.nextPage.bind(this)}
               backPage={this.backPage.bind(this)}
               toPage={this.toPage.bind(this)}

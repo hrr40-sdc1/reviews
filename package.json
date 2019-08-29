@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "setupdb": "node database/seedData.js",
-    "test": "./node_modules/.bin/mocha --exit --reporter spec ./server/index.spec.js"
+    "test": "./node_modules/.bin/mocha --exit --reporter spec ./tests/server.spec.js"
   },
   "dependencies": {
     "chai": "^4.2.0",

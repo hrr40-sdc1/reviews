@@ -1,6 +1,71 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 var moment = require('moment');
+import styled from 'styled-components';
+
+
+const TextDiv = styled.div`
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375em;
+  color: #484848;
+`;
+const NameDiv = styled.div`
+    /* margin: 0px !important; */
+    word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.375em !important;
+    color: #484848 !important;
+`;
+const ResponseNameDiv = styled.div`
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+  color: #484848 !important;
+`;
+const DateDiv = styled.div`
+    /* margin: 0px !important; */
+    word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.2857142857142858em !important;
+    color: #484848 !important;
+`;
+const Image = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%
+`;
+const ResponseImage = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%
+`;
+const ReadMore = styled.a`
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375em;
+  text-decoration: none;
+
+`;
+
+const LineThrough = styled.div`
+  border-bottom: 1px solid #EBEBEB;
+  margin-top: 24px;
+  margin-bottom: 24px;
+`;
+
+// border-bottom-width: var(--border-rule-border-width, 1px) !important;
+// border-bottom-color: var(--color-divider, #EBEBEB) !important;
+// }
+
 
 class Message extends React.Component {
   constructor(props) {
@@ -24,27 +89,25 @@ class Message extends React.Component {
       message = this.props.message.slice(0, 320);
       message += '...';
       console.log(message);
-      button = <a href="#" onClick={this.showMore}>
-              Show More
-              </a>
+      button = <ReadMore href="#" onClick={this.showMore}>
+              Read More
+              </ReadMore>
     } else {
       message = this.props.message;
       button = null;
     }
     return (
       <div>
-        <div className="message">
-          {message.split('\n').map((paragraph, i) => {
-            return <p key={i}>{paragraph}</p>
-          })}
-        </div>
+        <TextDiv className="message">
+          <p>{message}</p>
+        </TextDiv>
         {button}
       </div>
     )
   }
 
-}
 
+}
 
 
 class Reviews extends React.Component {
@@ -58,17 +121,17 @@ class Reviews extends React.Component {
     if (this.props.review.response.comment !== '') {
       response =  <div className="response">
                     <div className="responseImage">
-                      <img src={this.props.review.response.image}></img>
+                      <ResponseImage src={this.props.review.response.image}></ResponseImage>
                     </div>
-                    <div className="respnseTittle">
+                    <ResponseNameDiv className="respnseTittle">
                       Response from {this.props.review.response.name}:
-                    </div>
-                    <div className="responsecomment">
+                    </ResponseNameDiv>
+                    <TextDiv className="responsecomment">
                       {this.props.review.response.comment}
-                    </div>
-                    <div className="responseDate">
+                    </TextDiv>
+                    <DateDiv className="responseDate">
                       {moment(this.props.review.response.dateCreated).format("MMMM YYYY")}
-                    </div>
+                    </DateDiv>
                   </div>
     } else {
       response = null;
@@ -86,17 +149,20 @@ class Reviews extends React.Component {
 
     return(
       <div className="review">
+
         <div className="image">
-          <img src={this.props.review.userImage}></img>
+          <Image src={this.props.review.userImage}></Image>
         </div>
-        <div className="username">
-          {this.props.review.userName}
-        </div>
-        <div className="date">
+          <NameDiv className="username">
+            {this.props.review.userName}
+          </NameDiv>
+        <DateDiv className="date">
           {moment(Date.parse(this.props.review.dateCreated)).format("MMMM YYYY")}
-        </div>
+        </DateDiv>
+
         {message}
         {response}
+        <LineThrough></LineThrough>
       </div>
     )
 
@@ -114,4 +180,5 @@ const ReviewsList = (props) => (
 );
 
 export default ReviewsList;
+
 

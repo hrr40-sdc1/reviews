@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import ReviewsList from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
-import Nav from './Nav.jsx'
+import Nav from './Nav.jsx';
+import Search from './Search.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,9 +14,11 @@ class App extends React.Component {
       houseId: 7,
       ratings: {},
       reviews: [],
-      page: 0
-
+      page: 0,
+      length: 0
     }
+    this.searchTerm = '';
+    this.length = 0;
   }
   componentDidMount() {
     this.getRatings();
@@ -30,15 +33,47 @@ class App extends React.Component {
       this.getReviews(this.state.page - this.limit);
     }
    }
-  toPage(num) {
-    const offset = num * this.limit;
-    this.getReviews(offset);
+  search(term) {
+    this.searchTerm = term;
+    this.toPage(0);
 
   }
+  toPage(num) {
+
+    const offset = num * this.limit;
+    this.getReviews(offset);
+    // this.getRatings();
+  }
   getReviews(newPage) {
+    let currentUrl;
+    let secondUrl;
+    if (this.searchTerm === '') {
+      currentUrl = `http://localhost:5000/reviews/${this.state.houseId}?offset=${newPage}&limit=${this.limit}`
+      secondUrl = `http://localhost:5000/reviews/${this.state.houseId}`
+    } else {
+      currentUrl = `http://localhost:5000/reviews/${this.state.houseId}?offset=${newPage}&limit=${this.limit}&search=${this.searchTerm}`
+      secondUrl = `http://localhost:5000/reviews/${this.state.houseId}?search=${this.searchTerm}`
+    }
+    if (newPage === 0) {
+      $.ajax({
+        type: "get",
+        url: secondUrl,
+        contentTupe: "application/json",
+        success: (data) => {
+          this.setState({
+            length: data.length
+          })
+        },
+        error: () => {
+          console.log('get error')
+        }
+
+      })
+    }
+
     $.ajax({
       type: "get",
-      url: `http://localhost:5000/reviews/${this.state.houseId}?offset=${newPage}&limit=${this.limit}`,
+      url: currentUrl,
       contentTupe: "application/json",
       success: (data) => {
         this.setState({
@@ -51,7 +86,10 @@ class App extends React.Component {
       }
 
     })
+
   }
+
+
   getRatings() {
     $.ajax({
       type: "get",
@@ -70,16 +108,20 @@ class App extends React.Component {
 
   }
   render() {
+
     return (
       <div>
         <div className="ratings">
           <Ratings averageRatings={this.state.ratings}/>
         </div>
+        <div className="search">
+          <Search search={this.search.bind(this)}/>
+        </div>
         <div className="reviews">
           <ReviewsList reviews={this.state.reviews}/>
         </div>
         <div className="nav">
-          <Nav numOfPages={Math.ceil(this.state.ratings.numReviews / this.limit)}
+          <Nav numOfPages={Math.ceil(this.state.length / this.limit)}
               nextPage={this.nextPage.bind(this)}
               backPage={this.backPage.bind(this)}
               toPage={this.toPage.bind(this)}

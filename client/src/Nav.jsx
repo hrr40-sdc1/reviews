@@ -7,6 +7,7 @@ class Nav extends React.Component {
     super(props);
   }
   render() {
+
     let left;
     let right;
     let middle1;

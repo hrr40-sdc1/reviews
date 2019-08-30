@@ -54,20 +54,23 @@ class App extends React.Component {
       currentUrl = `http://localhost:5000/reviews/${this.state.houseId}?offset=${newPage}&limit=${this.limit}&search=${this.searchTerm}`
       secondUrl = `http://localhost:5000/reviews/${this.state.houseId}?search=${this.searchTerm}`
     }
-    $.ajax({
-      type: "get",
-      url: secondUrl,
-      contentTupe: "application/json",
-      success: (data) => {
-        this.setState({
-          length: data.length
-        })
-      },
-      error: () => {
-        console.log('get error')
-      }
+    if (newPage === 0) {
+      $.ajax({
+        type: "get",
+        url: secondUrl,
+        contentTupe: "application/json",
+        success: (data) => {
+          this.setState({
+            length: data.length
+          })
+        },
+        error: () => {
+          console.log('get error')
+        }
 
-    })
+      })
+    }
+
     $.ajax({
       type: "get",
       url: currentUrl,
@@ -105,7 +108,7 @@ class App extends React.Component {
 
   }
   render() {
-    console.log(this.state.reviews)
+
     return (
       <div>
         <div className="ratings">

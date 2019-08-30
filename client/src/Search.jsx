@@ -9,7 +9,6 @@ class Search extends React.Component {
     }
     this.handleChangeSearch = this.handleChangeSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
     this.search = this.props.search.bind(this);
   }
   handleSubmit(event) {
@@ -28,9 +27,6 @@ class Search extends React.Component {
         <input type="text" name="name" placeholder="Search Reviews" onChange={this.handleChangeSearch}/>
         </label>
         </form>
-        {/* <button className="create-submit-button" type="submit" onClick={() =>
-          this.props.search(this.state.term)
-          }>Search</button> */}
       </div>
     )
   }

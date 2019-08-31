@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
+const NavContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+`;
 
 class Nav extends React.Component {
   constructor(props) {
@@ -137,7 +142,7 @@ class Nav extends React.Component {
     }
 
     return(
-      <div className="nav">
+      <NavContainer className="nav">
         {left}
         <div className="first" onClick={ () => { this.props.toPage(0); } }>1</div>
         {middle1}
@@ -147,7 +152,7 @@ class Nav extends React.Component {
         {middle5}
         <div className="last" onClick={ () => { this.props.toPage(this.props.numOfPages - 1) }}>{this.props.numOfPages}</div>
         {right}
-      </div>
+      </NavContainer>
     )
 
   }

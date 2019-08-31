@@ -2,7 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-
+const RatingsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 50px 50px 50px
+`;
 const TextDiv = styled.div`
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
   font-size: 16px;
@@ -24,16 +28,26 @@ const NumReviewsDiv = styled.div`
 
 const Ratings = ({averageRatings}) => (
   <div>
-    <NumReviewsDiv id="numReviews">{averageRatings.numReviews} Reviews</NumReviewsDiv>
+  <NumReviewsDiv id="numReviews">{averageRatings.numReviews} Reviews</NumReviewsDiv>
+  <div id="overall">{averageRatings.overall}</div>
+
     <TextDiv id="ratings">
-      <div id="overall">{averageRatings.overall}</div>
-      <div id="accuracy">Accuracy {averageRatings.accuracy}</div>
-      <div id="communication">Communication {averageRatings.communication}</div>
-      <div id="clean">Cleanliness {averageRatings.cleanliness}</div>
-      <div id="location">Location {averageRatings.location}</div>
-      <div id="checkIn">Check In {averageRatings.checkIn}</div>
-      <div id="value">Value {averageRatings.value}</div>
+    <RatingsContainer>
+      <div id="accuracy">Accuracy</div>
+      <div>{averageRatings.accuracy}</div>
+      <div id="communication">Communication</div>
+      <div>{averageRatings.communication}</div>
+      <div id="clean">Cleanliness</div>
+      <div>{averageRatings.cleanliness}</div>
+      <div id="location">Location</div>
+      <div>{averageRatings.location}</div>
+      <div id="checkIn">Check In</div>
+      <div>{averageRatings.checkIn}</div>
+      <div id="value">Value</div>
+      <div>{averageRatings.value}</div>
+      </RatingsContainer>
     </TextDiv>
+
   </div>
 )
 

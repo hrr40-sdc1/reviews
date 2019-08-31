@@ -6,6 +6,7 @@ import Ratings from './Ratings.jsx';
 import Nav from './Nav.jsx';
 import Search from './Search.jsx';
 
+
 class App extends React.Component {
   constructor(props) {
     super();
@@ -111,11 +112,11 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className="ratings">
-          <Ratings averageRatings={this.state.ratings}/>
-        </div>
         <div className="search">
           <Search search={this.search.bind(this)}/>
+        </div>
+        <div className="ratings">
+          <Ratings averageRatings={this.state.ratings}/>
         </div>
         <div className="reviews">
           <ReviewsList reviews={this.state.reviews}/>

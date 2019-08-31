@@ -79,7 +79,7 @@ const DateDiv = styled.div`
   color: #484848 !important;
 `;
 const Image = styled.img`
-  grid-area: userPhoto;
+
   width: 50px;
   height: 50px;
   border-radius: 50%
@@ -201,8 +201,9 @@ class Reviews extends React.Component {
           <DateDiv className="date">
             {moment(Date.parse(this.props.review.dateCreated)).format("MMMM YYYY")}
           </DateDiv>
-          {message}
+
         </UserContainer>
+        {message}
         {response}
         <LineThrough></LineThrough>
       </ReviewContainer>

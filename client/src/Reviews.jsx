@@ -15,16 +15,15 @@ const ReviewContainer = styled.div`
 const UserContainer = styled.div`
   display: grid;
   grid-area: user;
-  grid-template-columns: 100px 100px;
+  grid-template-columns: 75px 150px;
   grid-template-row: auto auto;
   grid-template-areas:
     "userPhoto userName"
-    "userPhoto date"
 `;
 const ResponseContainer = styled.div`
   display: grid;
   grid-area: response;
-  grid-template-columns: 100px auto;
+  grid-template-columns: 75px auto;
   grid-template-rows: auto auto auto
   grid-template-areas:
     "responseImg responseUserName"
@@ -44,7 +43,8 @@ const TextDiv = styled.div`
   color: #484848;
 `;
 const ResponseTextDiv = styled.div`
-  grid-area: responseText;
+  grid-area: responseUserName;
+  margin-top: 20px;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
   font-size: 16px;
   font-weight: 400;
@@ -70,7 +70,8 @@ const ResponseNameDiv = styled.div`
   color: #484848 !important;
 `;
 const DateDiv = styled.div`
-  grid-area: date;
+  margin-top: 25px;
+  grid-area: userName;
   word-wrap: break-word !important;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
   font-size: 14px !important;
@@ -79,13 +80,14 @@ const DateDiv = styled.div`
   color: #484848 !important;
 `;
 const Image = styled.img`
-
+  grid-row: 1 / 4;
   width: 50px;
   height: 50px;
   border-radius: 50%
 `;
 const ResponseImage = styled.img`
   grid-area: responseImg;
+  margin-left: 20px;
   width: 40px;
   height: 40px;
   border-radius: 50%
@@ -98,7 +100,16 @@ const ReadMore = styled.a`
   text-decoration: none;
 
 `;
-
+const ResponseDate = styled.div`
+  margin-top: 15px;
+  grid-area: responseDate;
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.2857142857142858em !important;
+  color: #484848 !important;
+`;
 const LineThrough = styled.div`
   grid-area: line;
   border-bottom: 1px solid #EBEBEB;
@@ -171,9 +182,9 @@ class Reviews extends React.Component {
                     <ResponseTextDiv className="responsecomment">
                       {this.props.review.response.comment}
                     </ResponseTextDiv>
-                    <DateDiv className="responseDate">
+                    <ResponseDate className="responseDate">
                       {moment(this.props.review.response.dateCreated).format("MMMM YYYY")}
-                    </DateDiv>
+                    </ResponseDate>
                   </ResponseContainer>
     } else {
       response = null;

@@ -25,7 +25,6 @@ class App extends React.Component {
     this.getRatings();
     this.getReviews(0);
   }
-  // http://127.0.0.1:5000/reviews/76?offset=0&limit=7
   nextPage() {
     this.getReviews(this.state.page + this.limit);
   }

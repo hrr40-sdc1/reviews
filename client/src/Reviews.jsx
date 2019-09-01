@@ -143,7 +143,7 @@ class Message extends React.Component {
       message = this.props.message.slice(0, 320);
       message += '...';
       button = <ReadMore href="#" onClick={this.showMore}>
-              Read More
+              Read more
               </ReadMore>
     } else {
       message = this.props.message;
@@ -152,9 +152,10 @@ class Message extends React.Component {
     return (
       <ParentTextDiv>
         <TextDiv className="message">
-          <p>{message}</p>
+          <p>{message}{button}</p>
+
         </TextDiv>
-        {button}
+
       </ParentTextDiv>
     )
   }

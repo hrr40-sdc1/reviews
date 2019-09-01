@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
+
 const RatingsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -25,11 +26,25 @@ const NumReviewsDiv = styled.div`
   padding-top: 2px !important;
   padding-bottom: 2px !important;
 `;
-
+const OverallContainer = styled.div`
+  display: grid;
+  grid-template-columns: 150px 100px;
+`;
+const OverallRating = styled.div`
+  margin: auto;
+`;
 const Ratings = ({averageRatings}) => (
   <div>
-  <NumReviewsDiv id="numReviews">{averageRatings.numReviews} Reviews</NumReviewsDiv>
-  <div id="overall">{averageRatings.overall}</div>
+    <OverallContainer>
+      <NumReviewsDiv id="numReviews">{averageRatings.numReviews} Reviews
+      </NumReviewsDiv>
+      <OverallRating>{averageRatings.overall}</OverallRating>
+    </OverallContainer>
+
+
+
+
+
 
     <TextDiv id="ratings">
     <RatingsContainer>

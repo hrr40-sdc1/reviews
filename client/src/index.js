@@ -5,6 +5,13 @@ import ReviewsList from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
 import Nav from './Nav.jsx';
 import Search from './Search.jsx';
+import styled from 'styled-components';
+
+const SearchDiv = styled.div`
+  float: right;
+  margin-right: 100px;
+  margin-top: 15px;
+`;
 
 
 class App extends React.Component {
@@ -111,9 +118,9 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className="search">
+        <SearchDiv className="search">
           <Search search={this.search.bind(this)}/>
-        </div>
+        </SearchDiv>
         <div className="ratings">
           <Ratings averageRatings={this.state.ratings}/>
         </div>

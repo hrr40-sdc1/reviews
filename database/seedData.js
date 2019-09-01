@@ -37,7 +37,7 @@ for (var i = 0; i < 100; i++) {
     }
     if (j % randomNumber() === 0) {
       testData.response = {
-        name: faker.name.findName(),
+        name: faker.name.firstName(),
         image: faker.image.imageUrl(),
         comment: faker.lorem.paragraph(),
         date: faker.date.past()

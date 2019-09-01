@@ -1,6 +1,125 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 var moment = require('moment');
+import styled from 'styled-components';
+
+const ReviewContainer = styled.div`
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "user"
+    "message"
+    "response"
+    "line"
+`;
+const UserContainer = styled.div`
+  display: grid;
+  grid-area: user;
+  grid-template-columns: 75px 150px;
+  grid-template-row: auto auto;
+  grid-template-areas:
+    "userPhoto userName"
+`;
+const ResponseContainer = styled.div`
+  display: grid;
+  grid-area: response;
+  grid-template-columns: 75px auto;
+  grid-template-rows: auto auto auto
+  grid-template-areas:
+    "responseImg responseUserName"
+    "space  responseText"
+    "space  responseDate"
+`;
+
+const ParentTextDiv = styled.div`
+  grid-area: message;
+`;
+const TextDiv = styled.div`
+  grid-area: message;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375em;
+  color: #484848;
+`;
+const ResponseTextDiv = styled.div`
+  grid-area: responseUserName;
+  margin-top: 20px;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375em;
+  color: #484848;
+`;
+const NameDiv = styled.div`
+  grid-area: userName;
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+  color: #484848 !important;
+`;
+const ResponseNameDiv = styled.div`
+  grid-area: responseUserName;
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+  color: #484848 !important;
+`;
+const DateDiv = styled.div`
+  margin-top: 25px;
+  grid-area: userName;
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.2857142857142858em !important;
+  color: #484848 !important;
+`;
+const Image = styled.img`
+  grid-row: 1 / 4;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%
+`;
+const ResponseImage = styled.img`
+  grid-area: responseImg;
+  margin-left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%
+`;
+const ReadMore = styled.a`
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375em;
+  text-decoration: none;
+
+`;
+const ResponseDate = styled.div`
+  margin-top: 15px;
+  grid-area: responseDate;
+  word-wrap: break-word !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.2857142857142858em !important;
+  color: #484848 !important;
+`;
+const LineThrough = styled.div`
+  grid-area: line;
+  border-bottom: 1px solid #EBEBEB;
+  margin-top: 24px;
+  margin-bottom: 24px;
+`;
+
+
+
+
 
 class Message extends React.Component {
   constructor(props) {
@@ -23,28 +142,26 @@ class Message extends React.Component {
     if (this.state.expanded === false) {
       message = this.props.message.slice(0, 320);
       message += '...';
-      console.log(message);
-      button = <a href="#" onClick={this.showMore}>
-              Show More
-              </a>
+      button = <ReadMore href="#" onClick={this.showMore}>
+              Read more
+              </ReadMore>
     } else {
       message = this.props.message;
       button = null;
     }
     return (
-      <div>
-        <div className="message">
-          {message.split('\n').map((paragraph, i) => {
-            return <p key={i}>{paragraph}</p>
-          })}
-        </div>
-        {button}
-      </div>
+      <ParentTextDiv>
+        <TextDiv className="message">
+          <p>{message}{button}</p>
+
+        </TextDiv>
+
+      </ParentTextDiv>
     )
   }
 
-}
 
+}
 
 
 class Reviews extends React.Component {
@@ -56,48 +173,52 @@ class Reviews extends React.Component {
   render(){
     let response;
     if (this.props.review.response.comment !== '') {
-      response =  <div className="response">
+      response =  <ResponseContainer className="response">
                     <div className="responseImage">
-                      <img src={this.props.review.response.image}></img>
+                      <ResponseImage src={this.props.review.response.image}></ResponseImage>
                     </div>
-                    <div className="respnseTittle">
+                    <ResponseNameDiv className="respnseTittle">
                       Response from {this.props.review.response.name}:
-                    </div>
-                    <div className="responsecomment">
+                    </ResponseNameDiv>
+                    <ResponseTextDiv className="responsecomment">
                       {this.props.review.response.comment}
-                    </div>
-                    <div className="responseDate">
+                    </ResponseTextDiv>
+                    <ResponseDate className="responseDate">
                       {moment(this.props.review.response.dateCreated).format("MMMM YYYY")}
-                    </div>
-                  </div>
+                    </ResponseDate>
+                  </ResponseContainer>
     } else {
       response = null;
     }
     let message;
     if (this.props.review.comment.length < 320) {
-      message = <div className="message">
-      {this.props.review.comment.split('\n').map((paragraph, i) => {
-        return <p key={i}>{paragraph}</p>
-      })}
-      </div>
+      message = <ParentTextDiv className="message">
+                  <TextDiv>
+                  <p>{this.props.review.comment}</p>
+                  </TextDiv>
+                </ParentTextDiv>
     } else {
       message = <Message message={this.props.review.comment}/>
     }
 
     return(
-      <div className="review">
-        <div className="image">
-          <img src={this.props.review.userImage}></img>
-        </div>
-        <div className="username">
-          {this.props.review.userName}
-        </div>
-        <div className="date">
-          {moment(Date.parse(this.props.review.dateCreated)).format("MMMM YYYY")}
-        </div>
+      <ReviewContainer className="review">
+        <UserContainer>
+          <div className="image">
+            <Image src={this.props.review.userImage}></Image>
+          </div>
+            <NameDiv className="username">
+              {this.props.review.userName}
+            </NameDiv>
+          <DateDiv className="date">
+            {moment(Date.parse(this.props.review.dateCreated)).format("MMMM YYYY")}
+          </DateDiv>
+
+        </UserContainer>
         {message}
         {response}
-      </div>
+        <LineThrough></LineThrough>
+      </ReviewContainer>
     )
 
   }
@@ -114,4 +235,5 @@ const ReviewsList = (props) => (
 );
 
 export default ReviewsList;
+
 

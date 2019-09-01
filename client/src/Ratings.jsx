@@ -30,17 +30,35 @@ const OverallContainer = styled.div`
   display: grid;
   grid-template-columns: 150px 100px;
 `;
-const OverallRating = styled.div`
+const OverallRating = styled.img`
+  width: 140px;
   margin: auto;
 `;
+const EachRating = styled.img`
+  width: 100px;
+  // margin: auto;
+`;
+
+const imgUrls = {
+  "1.0": "http://127.0.0.1:5000/rating1star.jpg",
+  "1.5": "http://127.0.0.1:5000/rating1AndHalfstar.jpg",
+  "2.0": "http://127.0.0.1:5000/rating2star.jpg",
+  "2.5": "http://127.0.0.1:5000/rating2AndHalfstar.jpg",
+  "3.0": "http://127.0.0.1:5000/rating3star.jpg",
+  "3.5": "http://127.0.0.1:5000/rating3AndHalfstar.jpg",
+  "4.0": "http://127.0.0.1:5000/rating4star.jpg",
+  "4.5": "http://127.0.0.1:5000/rating4AndHalfstar.jpg",
+  "4.0": "http://127.0.0.1:5000/rating4star.jpg"
+
+}
+{/* <ResponseImage src={this.props.review.response.image}></ResponseImage> */}
 const Ratings = ({averageRatings}) => (
   <div>
     <OverallContainer>
       <NumReviewsDiv id="numReviews">{averageRatings.numReviews} Reviews
       </NumReviewsDiv>
-      <OverallRating>{averageRatings.overall}</OverallRating>
+      <OverallRating src={imgUrls[averageRatings.overall]}></OverallRating>
     </OverallContainer>
-
 
 
 
@@ -49,17 +67,17 @@ const Ratings = ({averageRatings}) => (
     <TextDiv id="ratings">
     <RatingsContainer>
       <div id="accuracy">Accuracy</div>
-      <div>{averageRatings.accuracy}</div>
+      <EachRating src={imgUrls[averageRatings.accuracy]}></EachRating>
       <div id="communication">Communication</div>
-      <div>{averageRatings.communication}</div>
+      <EachRating src={imgUrls[averageRatings.communication]}></EachRating>
       <div id="clean">Cleanliness</div>
-      <div>{averageRatings.cleanliness}</div>
+      <EachRating src={imgUrls[averageRatings.cleanliness]}></EachRating>
       <div id="location">Location</div>
-      <div>{averageRatings.location}</div>
+      <EachRating src={imgUrls[averageRatings.location]}></EachRating>
       <div id="checkIn">Check In</div>
-      <div>{averageRatings.checkIn}</div>
+      <EachRating src={imgUrls[averageRatings.checkIn]}></EachRating>
       <div id="value">Value</div>
-      <div>{averageRatings.value}</div>
+      <EachRating src={imgUrls[averageRatings.value]}></EachRating>
       </RatingsContainer>
     </TextDiv>
 

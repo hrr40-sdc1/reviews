@@ -16,19 +16,13 @@ const NavContainer = styled.div`
   grid-template-rows: 50px;
 `;
 const LeftRight = styled.img`
-  // margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50px;
 `;
 const CurrentNums = styled.div`
-  // margin-left: 20px;
-  // margin-top: -40px;
   color: white;
-  // display: grid;
-  // align-items: center;
-  // justify-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,7 +43,8 @@ class Nav extends React.Component {
     super(props);
   }
   render() {
-
+    var elmnt = document.getElementById("value");
+    // elmnt.scrollIntoView();
     let left;
     let right;
     let middle1;
@@ -59,31 +54,33 @@ class Nav extends React.Component {
     let middle5;
 
     if (this.props.currentPage !== 0) {
-      left = <LeftRight src={imgUrls.leftPage} onClick={this.props.backPage}></LeftRight>
+      left = <LeftRight src={imgUrls.leftPage} onClick={ () => {
+        this.props.backPage(); elmnt.scrollIntoView();}}></LeftRight>
+
     } else {
       left = null;
     }
 
     if (this.props.currentPage >= 4 && this.props.currentPage < (this.props.numOfPages - 4)) {
       middle1 = <Nums className="middle">...</Nums>
-      middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.currentPage - 1); } }>{this.props.currentPage}</Nums>
+      middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.currentPage - 1); elmnt.scrollIntoView(); } }>{this.props.currentPage}</Nums>
       middle3 =
       <Current className="middle current">
-        <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.currentPage + 1); } }></LeftRight>
+        <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.currentPage + 1); elmnt.scrollIntoView();} }></LeftRight>
         <CurrentNums>{this.props.currentPage + 1}</CurrentNums>
       </Current>
 
-      middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.currentPage + 1); } }>{this.props.currentPage + 2}</Nums>
+      middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.currentPage + 1); elmnt.scrollIntoView(); } }>{this.props.currentPage + 2}</Nums>
       middle5 = <Nums className="middle">...</Nums>
     } else if (this.props.currentPage < 4) {
         if (this.props.currentPage === 0) {
           if (this.props.numOfPages > 2) {
-            middle1 = <Nums className="middle" onClick={ () => { this.props.toPage(1); } }>2</Nums>
+            middle1 = <Nums className="middle" onClick={ () => { this.props.toPage(1); elmnt.scrollIntoView(); } }>2</Nums>
           } else {
             middle1 = null;
           }
           if (this.props.numOfPages > 3) {
-            middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(2); } }>3</Nums>
+            middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(2); elmnt.scrollIntoView();} }>3</Nums>
           } else {
             middle2 = null;
           }
@@ -99,14 +96,14 @@ class Nav extends React.Component {
             // middle1 = <Nums className="middle" onClick={ () => { this.props.toPage(1); } }>2</Nums>
             middle1 =
               <Current className="middle current">
-                <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(1); } }></LeftRight>
+                <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(1); elmnt.scrollIntoView(); } }></LeftRight>
                 <CurrentNums>{2}</CurrentNums>
               </Current>
           } else {
             middle1 = null;
           }
           if (this.props.numOfPages > 3) {
-            middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(2); } }>3</Nums>
+            middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(2); elmnt.scrollIntoView(); } }>3</Nums>
           } else {
             middle2 = null;
           }
@@ -118,18 +115,18 @@ class Nav extends React.Component {
           middle4 = null;
           middle5 = null;
         } else if (this.props.currentPage === 2) {
-          middle1 = <Nums className="middle current" onClick={ () => { this.props.toPage(1); } }>2</Nums>
+          middle1 = <Nums className="middle current" onClick={ () => { this.props.toPage(1); elmnt.scrollIntoView(); } }>2</Nums>
           if (this.props.numOfPages > 3) {
             middle2 =
               <Current className="middle current">
-                <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }></LeftRight>
+                <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 2); elmnt.scrollIntoView(); } }></LeftRight>
                 <CurrentNums>{3}</CurrentNums>
               </Current>
           } else {
             middle2 = null;
           }
           if (this.props.numOfPages > 4) {
-            middle3 = <Nums className="middle" onClick={ () => { this.props.toPage(3); } }>4</Nums>
+            middle3 = <Nums className="middle" onClick={ () => { this.props.toPage(3); elmnt.scrollIntoView(); } }>4</Nums>
           } else {
             middle3 = null;
           }
@@ -140,16 +137,16 @@ class Nav extends React.Component {
           }
           middle5 = null;
         } else if (this.props.currentPage === 3) {
-          middle1 = <Nums className="middle" onClick={ () => { this.props.toPage(1); } }>2</Nums>
-          middle2 = <Nums className="middle current" onClick={ () => { this.props.toPage(2); } }>3</Nums>
+          middle1 = <Nums className="middle" onClick={ () => { this.props.toPage(1); elmnt.scrollIntoView(); } }>2</Nums>
+          middle2 = <Nums className="middle current" onClick={ () => { this.props.toPage(2); elmnt.scrollIntoView(); } }>3</Nums>
           // middle3 = <Nums className="middle" onClick={ () => { this.props.toPage(3); } }>4</Nums>
           middle3 =
             <Current className="middle current">
-              <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(3); } }></LeftRight>
+              <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(3); elmnt.scrollIntoView(); } }></LeftRight>
               <CurrentNums>{4}</CurrentNums>
             </Current>
           if (this.props.numOfPages > 5) {
-            middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(4); } }>5</Nums>
+            middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(4); elmnt.scrollIntoView(); } }>5</Nums>
           } else {
             middle4 = null;
           }
@@ -162,41 +159,41 @@ class Nav extends React.Component {
          }
     } else {
       if (this.props.currentPage === this.props.numOfPages - 1) {
-        middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }>{this.props.numOfPages - 1}</Nums>
+        middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); elmnt.scrollIntoView(); } }>{this.props.numOfPages - 1}</Nums>
 
-        middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); } }>{this.props.numOfPages - 2}</Nums>
+        middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); elmnt.scrollIntoView(); } }>{this.props.numOfPages - 2}</Nums>
         middle3 = <Nums className="middle">...</Nums>
         middle2 = null;
         middle1 = null;
       } else if (this.props.currentPage === this.props.numOfPages - 2) {
         middle5 =
           <Current className="middle current">
-            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }></LeftRight>
+            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 2); elmnt.scrollIntoView(); } }></LeftRight>
             <CurrentNums>{this.props.numOfPages - 1}</CurrentNums>
           </Current>
-        middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); } }>{this.props.numOfPages - 2}</Nums>
+        middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); elmnt.scrollIntoView(); } }>{this.props.numOfPages - 2}</Nums>
         middle3 = <Nums className="middle">...</Nums>
         middle2 = null;
         middle1 = null;
       } else if (this.props.currentPage === this.props.numOfPages - 3) {
-        middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }>{this.props.numOfPages - 1}</Nums>
+        middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); elmnt.scrollIntoView(); } }>{this.props.numOfPages - 1}</Nums>
         middle4 =
           <Current className="middle current">
-            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 3); } }></LeftRight>
+            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 3); elmnt.scrollIntoView(); } }></LeftRight>
             <CurrentNums>{this.props.numOfPages - 2}</CurrentNums>
           </Current>
-        middle3 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 4); } }>{this.props.numOfPages - 3}</Nums>
+        middle3 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 4); elmnt.scrollIntoView(); } }>{this.props.numOfPages - 3}</Nums>
         middle2 = <Nums className="middle">...</Nums>
         middle1 = null;
       } else if (this.props.currentPage === this.props.numOfPages - 4) {
-        middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }>{this.props.numOfPages - 1}</Nums>
-        middle4 = <Nums className="middle current" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); } }>{this.props.numOfPages - 2}</Nums>
+        middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); elmnt.scrollIntoView();} }>{this.props.numOfPages - 1}</Nums>
+        middle4 = <Nums className="middle current" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); elmnt.scrollIntoView(); } }>{this.props.numOfPages - 2}</Nums>
         middle3 =
           <Current className="middle current">
-            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 4); } }></LeftRight>
+            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 4); elmnt.scrollIntoView(); } }></LeftRight>
             <CurrentNums>{this.props.numOfPages - 3}</CurrentNums>
           </Current>
-        middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 5); } }>{this.props.numOfPages - 4}</Nums>
+        middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 5); elmnt.scrollIntoView(); } }>{this.props.numOfPages - 4}</Nums>
         middle1 = <Nums className="middle">...</Nums>
        }
 
@@ -204,22 +201,23 @@ class Nav extends React.Component {
 
 
     if (this.props.currentPage !== this.props.numOfPages -1) {
-      right = <LeftRight src={imgUrls.rightPage} onClick={this.props.nextPage}></LeftRight>
+      right = <LeftRight src={imgUrls.rightPage} onClick={ () => {
+        this.props.nextPage(); elmnt.scrollIntoView(); }}></LeftRight>
 
     } else {
       right = null;
     }
-    let first = <Nums className="first" onClick={ () => { this.props.toPage(0); } }>1</Nums>;
-    let last = <Nums className="last" onClick={ () => { this.props.toPage(this.props.numOfPages - 1) }}>{this.props.numOfPages}</Nums>;
+    let first = <Nums className="first" onClick={ () => { this.props.toPage(0); elmnt.scrollIntoView();} }>1</Nums>;
+    let last = <Nums className="last" onClick={ () => { this.props.toPage(this.props.numOfPages - 1); elmnt.scrollIntoView(); } }>{this.props.numOfPages}</Nums>;
     if (this.props.currentPage === 0) {
       first =   <Current className="middle current">
-            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(0); } }></LeftRight>
+            <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(0); elmnt.scrollIntoView(); } }></LeftRight>
             <CurrentNums>{this.props.currentPage + 1}</CurrentNums>
           </Current>
     }
     if (this.props.currentPage === this.props.numOfPages - 1) {
       last =  <Current className="middle current">
-                <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 1); } }></LeftRight>
+                <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 1); elmnt.scrollIntoView(); } }></LeftRight>
                 <CurrentNums>{this.props.currentPage + 1}</CurrentNums>
               </Current>
     }

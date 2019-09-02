@@ -98,7 +98,7 @@ const ReadMore = styled.a`
   font-weight: 400;
   line-height: 1.375em;
   text-decoration: none;
-
+  color: #008489;
 `;
 const ResponseDate = styled.div`
   margin-top: 15px;

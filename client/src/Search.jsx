@@ -17,6 +17,7 @@ const Exit = styled.div`
   color: #EBEBER;
 `;
 
+
 class Search extends React.Component {
   constructor(props) {
     super(props);

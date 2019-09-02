@@ -201,7 +201,7 @@ class Reviews extends React.Component {
       response = null;
     }
     let message;
-    if (this.props.review.comment.length < 320) {
+    if (this.props.review.comment.length < 320 || this.props.searchTerm.length > 0) {
       let output = "";
       if (this.props.searchTerm !== '') {
         const searchItem = this.props.searchTerm

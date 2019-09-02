@@ -119,7 +119,16 @@ const LineThrough = styled.div`
 
 
 
+const BoldText = (props) => (
+  props.text.map((item, i) => {
+    if (i === props.text.length - 1) {
+      return <span>{item}</span>
+   } else {
+      return <span>{item}<b>{props.keyword}</b></span>
+    }
+  })
 
+)
 
 class Message extends React.Component {
   constructor(props) {
@@ -171,6 +180,7 @@ class Reviews extends React.Component {
   }
 
   render(){
+
     let response;
     if (this.props.review.response.comment !== '') {
       response =  <ResponseContainer className="response">
@@ -192,11 +202,27 @@ class Reviews extends React.Component {
     }
     let message;
     if (this.props.review.comment.length < 320) {
-      message = <ParentTextDiv className="message">
+      let output = "";
+      if (this.props.searchTerm !== '') {
+        const searchItem = this.props.searchTerm
+        const split = this.props.review.comment.split(this.props.searchTerm);
+        message =
+        <ParentTextDiv className="message">
+        <TextDiv>
+        <BoldText text={split} keyword={searchItem}/>
+         </TextDiv>
+      </ParentTextDiv>
+
+      } else {
+         message = <ParentTextDiv className="message">
                   <TextDiv>
                   <p>{this.props.review.comment}</p>
-                  </TextDiv>
+                   </TextDiv>
                 </ParentTextDiv>
+      }
+
+
+
     } else {
       message = <Message message={this.props.review.comment}/>
     }
@@ -215,7 +241,7 @@ class Reviews extends React.Component {
           </DateDiv>
 
         </UserContainer>
-        {message}
+        <span>{message}</span>
         {response}
         <LineThrough></LineThrough>
       </ReviewContainer>
@@ -228,7 +254,7 @@ const ReviewsList = (props) => (
    <div className="feed">
     <div className="reviews">
     {props.reviews.map((feedItem, i)=>
-      <Reviews review={feedItem} key={i}/>
+      <Reviews review={feedItem} key={i} searchTerm={props.searchTerm}/>
     )}
     </div>
   </div>

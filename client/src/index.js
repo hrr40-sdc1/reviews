@@ -125,7 +125,7 @@ class App extends React.Component {
           <Ratings averageRatings={this.state.ratings}/>
         </div>
         <div className="reviews">
-          <ReviewsList reviews={this.state.reviews}/>
+          <ReviewsList reviews={this.state.reviews} searchTerm={this.searchTerm}/>
         </div>
         <div className="nav">
           <Nav numOfPages={Math.ceil(this.state.length / this.limit)}

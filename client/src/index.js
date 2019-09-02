@@ -10,7 +10,7 @@ import styled from 'styled-components';
 const SearchDiv = styled.div`
   float: right;
   margin-right: 100px;
-  margin-top: 15px;
+  margin-top: 5px;
 `;
 
 

@@ -2,6 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
+const LineThrough = styled.div`
+  border-bottom: 1px solid #EBEBEB;
+  margin-top: 24px;
+  margin-bottom: 24px;
+`;
+
 
 const RatingsContainer = styled.div`
   display: grid;
@@ -59,7 +65,7 @@ const Ratings = ({averageRatings}) => (
       </NumReviewsDiv>
       <OverallRating src={imgUrls[averageRatings.overall]}></OverallRating>
     </OverallContainer>
-
+    <LineThrough></LineThrough>
 
 
 

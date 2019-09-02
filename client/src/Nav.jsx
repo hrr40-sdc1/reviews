@@ -12,19 +12,36 @@ const imgUrls = {
 
 const NavContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+  grid-template-rows: 50px;
 `;
 const LeftRight = styled.img`
-  margin: auto;
+  // margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px;
 `;
 const CurrentNums = styled.div`
-  margin-left: 20px;
-  margin-top: -40px;
+  // margin-left: 20px;
+  // margin-top: -40px;
   color: white;
+  // display: grid;
+  // align-items: center;
+  // justify-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 const Nums = styled.div`
-  margin-top: 1px;
+  // margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Current = styled.div`
+  position: relative;
 `;
 
 class Nav extends React.Component {
@@ -51,10 +68,10 @@ class Nav extends React.Component {
       middle1 = <Nums className="middle">...</Nums>
       middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.currentPage - 1); } }>{this.props.currentPage}</Nums>
       middle3 =
-      <div className="middle current">
+      <Current className="middle current">
         <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.currentPage + 1); } }></LeftRight>
         <CurrentNums>{this.props.currentPage + 1}</CurrentNums>
-      </div>
+      </Current>
 
       middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.currentPage + 1); } }>{this.props.currentPage + 2}</Nums>
       middle5 = <Nums className="middle">...</Nums>
@@ -81,10 +98,10 @@ class Nav extends React.Component {
           if (this.props.numOfPages > 2) {
             // middle1 = <Nums className="middle" onClick={ () => { this.props.toPage(1); } }>2</Nums>
             middle1 =
-              <div className="middle current">
+              <Current className="middle current">
                 <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(1); } }></LeftRight>
                 <CurrentNums>{2}</CurrentNums>
-              </div>
+              </Current>
           } else {
             middle1 = null;
           }
@@ -101,13 +118,13 @@ class Nav extends React.Component {
           middle4 = null;
           middle5 = null;
         } else if (this.props.currentPage === 2) {
-          middle1 = <div className="middle current" onClick={ () => { this.props.toPage(1); } }>2</div>
+          middle1 = <Nums className="middle current" onClick={ () => { this.props.toPage(1); } }>2</Nums>
           if (this.props.numOfPages > 3) {
             middle2 =
-              <div className="middle current">
+              <Current className="middle current">
                 <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }></LeftRight>
                 <CurrentNums>{3}</CurrentNums>
-              </div>
+              </Current>
           } else {
             middle2 = null;
           }
@@ -127,10 +144,10 @@ class Nav extends React.Component {
           middle2 = <Nums className="middle current" onClick={ () => { this.props.toPage(2); } }>3</Nums>
           // middle3 = <Nums className="middle" onClick={ () => { this.props.toPage(3); } }>4</Nums>
           middle3 =
-            <div className="middle current">
+            <Current className="middle current">
               <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(3); } }></LeftRight>
               <CurrentNums>{4}</CurrentNums>
-            </div>
+            </Current>
           if (this.props.numOfPages > 5) {
             middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(4); } }>5</Nums>
           } else {
@@ -153,10 +170,10 @@ class Nav extends React.Component {
         middle1 = null;
       } else if (this.props.currentPage === this.props.numOfPages - 2) {
         middle5 =
-          <div className="middle current">
+          <Current className="middle current">
             <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }></LeftRight>
             <CurrentNums>{this.props.numOfPages - 1}</CurrentNums>
-          </div>
+          </Current>
         middle4 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); } }>{this.props.numOfPages - 2}</Nums>
         middle3 = <Nums className="middle">...</Nums>
         middle2 = null;
@@ -164,10 +181,10 @@ class Nav extends React.Component {
       } else if (this.props.currentPage === this.props.numOfPages - 3) {
         middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }>{this.props.numOfPages - 1}</Nums>
         middle4 =
-          <div className="middle current">
+          <Current className="middle current">
             <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 3); } }></LeftRight>
             <CurrentNums>{this.props.numOfPages - 2}</CurrentNums>
-          </div>
+          </Current>
         middle3 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 4); } }>{this.props.numOfPages - 3}</Nums>
         middle2 = <Nums className="middle">...</Nums>
         middle1 = null;
@@ -175,10 +192,10 @@ class Nav extends React.Component {
         middle5 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 2); } }>{this.props.numOfPages - 1}</Nums>
         middle4 = <Nums className="middle current" onClick={ () => { this.props.toPage(this.props.numOfPages - 3); } }>{this.props.numOfPages - 2}</Nums>
         middle3 =
-          <div className="middle current">
+          <Current className="middle current">
             <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 4); } }></LeftRight>
             <CurrentNums>{this.props.numOfPages - 3}</CurrentNums>
-          </div>
+          </Current>
         middle2 = <Nums className="middle" onClick={ () => { this.props.toPage(this.props.numOfPages - 5); } }>{this.props.numOfPages - 4}</Nums>
         middle1 = <Nums className="middle">...</Nums>
        }
@@ -195,16 +212,16 @@ class Nav extends React.Component {
     let first = <Nums className="first" onClick={ () => { this.props.toPage(0); } }>1</Nums>;
     let last = <Nums className="last" onClick={ () => { this.props.toPage(this.props.numOfPages - 1) }}>{this.props.numOfPages}</Nums>;
     if (this.props.currentPage === 0) {
-      first =   <div className="middle current">
+      first =   <Current className="middle current">
             <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(0); } }></LeftRight>
             <CurrentNums>{this.props.currentPage + 1}</CurrentNums>
-          </div>
+          </Current>
     }
     if (this.props.currentPage === this.props.numOfPages - 1) {
-      last =  <div className="middle current">
+      last =  <Current className="middle current">
                 <LeftRight src={imgUrls.current} onClick={ () => { this.props.toPage(this.props.numOfPages - 1); } }></LeftRight>
                 <CurrentNums>{this.props.currentPage + 1}</CurrentNums>
-              </div>
+              </Current>
     }
     return(
       <NavContainer className="nav">

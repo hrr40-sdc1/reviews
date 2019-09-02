@@ -30,6 +30,7 @@ class Search extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.search(this.state.term);
+
   }
   handleChangeSearch(event) {
     this.setState({term: event.target.value});
@@ -41,6 +42,7 @@ class Search extends React.Component {
       exit = <Exit onClick={() => {
         this.search('');
         this.setState({term: ''});
+        document.getElementById('search').value = "";
       }}>X</Exit>
     } else {
       exit = null;
@@ -49,7 +51,7 @@ class Search extends React.Component {
       <div className="search">
          <form onSubmit={this.handleSubmit}>
         <label>
-        <Input type="text" name="name" placeholder="Search Reviews" onChange={this.handleChangeSearch}/>
+        <Input id="search" type="text" name="name" placeholder="Search Reviews" onChange={this.handleChangeSearch}/>
         {exit}
         </label>
         </form>

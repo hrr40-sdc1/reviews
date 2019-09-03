@@ -12,7 +12,8 @@ const LineThrough = styled.div`
 const RatingsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 50px 50px 50px
+  grid-template-rows: 40px 40px 40px;
+
 `;
 const TextDiv = styled.div`
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;

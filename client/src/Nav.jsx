@@ -29,7 +29,6 @@ const CurrentNums = styled.div`
   transform: translate(-50%, -50%);
 `;
 const Nums = styled.div`
-  // margin-top: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +43,6 @@ class Nav extends React.Component {
   }
   render() {
     var elmnt = document.getElementById("value");
-    // elmnt.scrollIntoView();
     let left;
     let right;
     let middle1;

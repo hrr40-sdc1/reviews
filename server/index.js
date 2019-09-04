@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const Review = require('../database/schema.js');
 const port = 5000;
+var cors = require('cors');
 // const exports = module.exports = {};
 
 app.listen(port, function() {
@@ -10,7 +11,7 @@ app.listen(port, function() {
 
 app.use(express.static('./client/dist'));
 app.use(express.static('./images'));
-
+app.use(cors());
 app.get('/reviews/:houseId', function(req, res) {
   const query = req.query;
   const params = req.params;

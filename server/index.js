@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const Review = require('../database/schema.js');
 const port = 5000;
+const bodyParser = require('body-parser')
 var cors = require('cors');
 // const exports = module.exports = {};
 
@@ -12,6 +13,9 @@ app.listen(port, function() {
 app.use(express.static('./client/dist'));
 app.use(express.static('./images'));
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.json());
 app.get('/reviews/:houseId', function(req, res) {
   const query = req.query;
   const params = req.params;
@@ -71,5 +75,44 @@ app.get('/ratings/:houseId', function(req, res) {
     }
   })
 });
+
+app.post('/reviews', function(req, res) {
+  Review.create(req.body, (err, review) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({message: 'Error creating review'});
+    } else {
+      res.status(201).json ({
+          message: 'Handling POST request to /ratings',
+          createdReview: review
+         });
+    }
+  });
+
+});
+
+app.put('/reviews/:revId', function(req, res) {
+  Review.findByIdAndUpdate(req.params.revId, req.body, (err,data) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log(data);
+  }).
+  then(() => res.status(200).send('done')).
+  catch((err) => res.status(500).send(err));
+});
+
+app.delete('/reviews/:revId', function(req, res) {
+  Review.findByIdAndRemove(req.params.revId, req.body, (err,data) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log(data);
+  }).
+  then(() => res.status(200).send('Deleted!')).
+  catch((err) => res.status(500).send(err));
+});
+
+
 
 module.exports = app;
